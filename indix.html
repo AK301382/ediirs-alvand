@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرکت ترانزیتی و بارچالانی بین‌المللی ادریس الوند</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#1e40af',secondary:'#4f46e5'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        
+        @font-face {
+            font-family: 'Pashto';
+            src: url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap');
+        }
+        
+        :root {
+            --font-persian: 'Vazirmatn', sans-serif;
+            --font-pashto: 'Pashto', 'Noto Naskh Arabic', sans-serif;
+            --font-english: 'Inter', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-persian);
+        }
+        
+        html[lang="fa"] body {
+            font-family: var(--font-persian);
+        }
+        
+        html[lang="ps"] body {
+            font-family: var(--font-pashto);
+        }
+        
+        html[lang="en"] body {
+            font-family: var(--font-english);
+            direction: ltr;
+        }
+        
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 600px;
+        }
+        
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+        
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: white;
+        }
+        
+        
+        .slider-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .slider-arrow.prev {
+            left: 20px;
+        }
+        
+        .slider-arrow.next {
+            right: 20px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1e40af;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        input, textarea {
+            direction: inherit;
+        }
+        
+        html[lang="en"] .rtl-specific {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        html[lang="fa"] .ltr-specific,
+        html[lang="ps"] .ltr-specific {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        @media (max-width: 768px) {
+            .slider-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="toast" class="toast">زبان به فارسی تغییر کرد</div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-['Pacifico'] text-primary">logo</h1>
+                    <div class="hidden md:flex items-center mr-10 space-x-6 space-x-reverse">
+                        <a href="#home" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="خانه" data-lang-ps="کور" data-lang-en="Home">خانه</a>
+                        <a href="#about" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="درباره ما" data-lang-ps="زموږ په اړه" data-lang-en="About Us">درباره ما</a>
+                        <a href="#services" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="خدمات" data-lang-ps="خدمتونه" data-lang-en="Services">خدمات</a>
+                        <a href="#contact" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="تماس با ما" data-lang-ps="موږ سره اړیکه ونیسئ" data-lang-en="Contact Us">تماس با ما</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <div class="relative" id="language-selector">
+                        <button id="language-button" class="flex items-center space-x-2 space-x-reverse bg-gray-100 hover:bg-gray-200 rounded-button px-4 py-2 transition duration-300 whitespace-nowrap">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-global-line"></i>
+                            </div>
+                            <span id="current-language" data-lang-fa="فارسی" data-lang-ps="پښتو" data-lang-en="English">فارسی</span>
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-arrow-down-s-line"></i>
+                            </div>
+                        </button>
+                        <div id="language-dropdown" class="absolute mt-2 w-full bg-white shadow-lg rounded-md overflow-hidden hidden">
+                            <div class="py-1">
+                                <button data-lang="fa" class="w-full text-right px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">فارسی</button>
+                                <button data-lang="ps" class="w-full text-right px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">پښتو</button>
+                                <button data-lang="en" class="w-full text-right px-4 py-2 text-gray-800 hover:bg-gray-100 transition duration-300">English</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-800">
+                        <i class="ri-menu-line text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="خانه" data-lang-ps="کور" data-lang-en="Home">خانه</a>
+                    <a href="#about" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="درباره ما" data-lang-ps="زموږ په اړه" data-lang-en="About Us">درباره ما</a>
+                    <a href="#services" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="خدمات" data-lang-ps="خدمتونه" data-lang-en="Services">خدمات</a>
+                    <a href="#contact" class="text-gray-800 hover:text-primary transition duration-300 font-medium" data-lang-fa="تماس با ما" data-lang-ps="موږ سره اړیکه ونیسئ" data-lang-en="Contact Us">تماس با ما</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section id="home" class="slider-container">
+        <div class="slider">
+            <div class="slide" style="background-image: url('https://readdy.ai/api/search-image?query=professional%2520international%2520logistics%2520and%2520freight%2520forwarding%2520company%2520with%2520cargo%2520containers%2520at%2520port%2520terminal%2C%2520commercial%2520shipping%2520yard%2520with%2520cranes%2520and%2520trucks%2C%2520global%2520transportation%2520business%2C%2520high-quality%2520professional%2520photo&width=1600&height=900&seq=1&orientation=landscape');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4" data-lang-fa="خدمات ترانزیت و بارچالانی بین‌المللی" data-lang-ps="د نړیوال ترانزیت او بار وړلو خدمتونه" data-lang-en="International Transit & Forwarding Services">خدمات ترانزیت و بارچالانی بین‌المللی</h2>
+                    <p class="text-xl mb-6" data-lang-fa="ارائه دهنده راه‌حل‌های حمل و نقل جهانی با بیش از ۱۵ سال تجربه" data-lang-ps="د نړیوال ترانسپورت حل لارې وړاندې کوي د ۱۵ کلونو څخه زیات تجربې سره" data-lang-en="Providing global transportation solutions with over 15 years of experience">ارائه دهنده راه‌حل‌های حمل و نقل جهانی با بیش از ۱۵ سال تجربه</p>
+                    <a href="#contact" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-button font-medium transition duration-300 inline-block whitespace-nowrap" data-lang-fa="با ما تماس بگیرید" data-lang-ps="موږ سره اړیکه ونیسئ" data-lang-en="Contact Us">با ما تماس بگیرید</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav"></div>
+        <div class="slider-arrow prev">
+            <i class="ri-arrow-left-s-line text-white text-2xl"></i>
+        </div>
+        <div class="slider-arrow next">
+            <i class="ri-arrow-right-s-line text-white text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-lang-fa="درباره شرکت ادریس الوند" data-lang-ps="د ادریس الوند شرکت په اړه" data-lang-en="About Edris Alvand Company">درباره شرکت ادریس الوند</h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4" data-lang-fa="پیشگام در صنعت حمل و نقل بین‌المللی" data-lang-ps="د نړیوال ترانسپورت په صنعت کې مخکښ" data-lang-en="Leader in International Transport Industry">پیشگام در صنعت حمل و نقل بین‌المللی</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed" data-lang-fa="شرکت ترانزیتی و بارچالانی بین‌المللی ادریس الوند با بیش از ۱۵ سال تجربه در زمینه حمل و نقل بین‌المللی، یکی از معتبرترین شرکت‌های فعال در این صنعت می‌باشد. ما با بهره‌گیری از کادری مجرب و متخصص، خدمات متنوعی در زمینه حمل و نقل زمینی، هوایی و دریایی به مشتریان خود ارائه می‌دهیم." data-lang-ps="ادریس الوند نړیوال ترانزیت او بار وړلو شرکت د نړیوال ترانسپورت په برخه کې له ۱۵ کلونو څخه زیات تجربې سره، په دې صنعت کې یو له معتبرو فعالو شرکتونو څخه دی. موږ د تجربه لرونکي او متخصص کارمندانو په کارولو سره، خپلو پیرودونکو ته د ځمکني، هوايي او سمندري ترانسپورت په برخه کې ډول ډول خدمتونه وړاندې کوو." data-lang-en="Edris Alvand International Transit & Forwarding Company, with over 15 years of experience in international transportation, is one of the most reputable companies active in this industry. By employing experienced and specialized staff, we provide various services in land, air, and sea transportation to our customers.">شرکت ترانزیتی و بارچالانی بین‌المللی ادریس الوند با بیش از ۱۵ سال تجربه در زمینه حمل و نقل بین‌المللی، یکی از معتبرترین شرکت‌های فعال در این صنعت می‌باشد. ما با بهره‌گیری از کادری مجرب و متخصص، خدمات متنوعی در زمینه حمل و نقل زمینی، هوایی و دریایی به مشتریان خود ارائه می‌دهیم.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-6">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-3">
+                                <i class="ri-award-line text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1" data-lang-fa="ماموریت ما" data-lang-ps="زموږ ماموریت" data-lang-en="Our Mission">ماموریت ما</h4>
+                                <p class="text-gray-600 text-sm" data-lang-fa="ارائه خدمات حمل و نقل با بالاترین کیفیت و قیمت رقابتی" data-lang-ps="د لوړ کیفیت او سیالۍ بیې سره د ترانسپورت خدمتونو وړاندې کول" data-lang-en="Providing transportation services with the highest quality and competitive pricing">ارائه خدمات حمل و نقل با بالاترین کیفیت و قیمت رقابتی</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-3">
+                                <i class="ri-eye-line text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1" data-lang-fa="چشم‌انداز ما" data-lang-ps="زموږ لید" data-lang-en="Our Vision">چشم‌انداز ما</h4>
+                                <p class="text-gray-600 text-sm" data-lang-fa="تبدیل شدن به برترین شرکت حمل و نقل در منطقه" data-lang-ps="په سیمه کې د غوره ترانسپورت شرکت په توګه بدلیدل" data-lang-en="Becoming the leading transportation company in the region">تبدیل شدن به برترین شرکت حمل و نقل در منطقه</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white shadow-sm rounded-lg px-4 py-3 flex items-center">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-3">
+                                <i class="ri-truck-line text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-gray-900">۱۵۰۰+</span>
+                                <span class="text-sm text-gray-600" data-lang-fa="محموله ماهانه" data-lang-ps="میاشتنۍ محمولې" data-lang-en="Monthly Shipments">محموله ماهانه</span>
+                            </div>
+                        </div>
+                        <div class="bg-white shadow-sm rounded-lg px-4 py-3 flex items-center">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-3">
+                                <i class="ri-map-pin-line text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-gray-900">۳۰+</span>
+                                <span class="text-sm text-gray-600" data-lang-fa="کشور تحت پوشش" data-lang-ps="تر پوښښ لاندې هیوادونه" data-lang-en="Countries Covered">کشور تحت پوشش</span>
+                            </div>
+                        </div>
+                        <div class="bg-white shadow-sm rounded-lg px-4 py-3 flex items-center">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mr-3">
+                                <i class="ri-user-smile-line text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-gray-900">۹۵٪</span>
+                                <span class="text-sm text-gray-600" data-lang-fa="رضایت مشتریان" data-lang-ps="د پیرودونکو رضایت" data-lang-en="Customer Satisfaction">رضایت مشتریان</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 md:order-2">
+                    <img src="https://readdy.ai/api/search-image?query=professional%2520logistics%2520company%2520office%2520with%2520staff%2520working%2C%2520modern%2520corporate%2520environment%2C%2520international%2520shipping%2520and%2520freight%2520forwarding%2520business%2C%2520clean%2520workspace%2520with%2520computers%2520and%2520maps%2C%2520high-quality%2520professional%2520photo&width=800&height=600&seq=4&orientation=landscape" alt="شرکت ادریس الوند" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-lang-fa="خدمات ما" data-lang-ps="زموږ خدمتونه" data-lang-en="Our Services">خدمات ما</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-lang-fa="ما مجموعه‌ای از خدمات حمل و نقل و لجستیک را برای پاسخگویی به نیازهای تجاری شما ارائه می‌دهیم" data-lang-ps="موږ ستاسو د سوداګرۍ اړتیاو ته د ځواب ویلو لپاره د ترانسپورت او لوجیستیکي خدماتو یوه ټولګه وړاندې کوو" data-lang-en="We offer a range of transportation and logistics services to meet your business needs">ما مجموعه‌ای از خدمات حمل و نقل و لجستیک را برای پاسخگویی به نیازهای تجاری شما ارائه می‌دهیم</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=international%2520road%2520transport%2520with%2520large%2520trucks%2520on%2520highway%2C%2520freight%2520transportation%2520service%2C%2520commercial%2520logistics%2520vehicles%2520carrying%2520cargo%2C%2520professional%2520trucking%2520fleet%2C%2520high-quality%2520professional%2520photo&width=600&height=400&seq=5&orientation=landscape" alt="حمل و نقل زمینی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full text-primary mb-4">
+                            <i class="ri-truck-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang-fa="حمل و نقل زمینی" data-lang-ps="ځمکني ترانسپورت" data-lang-en="Land Transportation">حمل و نقل زمینی</h3>
+                        <p class="text-gray-600 mb-4" data-lang-fa="خدمات حمل و نقل جاده‌ای با ناوگان مجهز و مدرن به تمام کشورهای منطقه و اروپا. ما با بهره‌گیری از رانندگان با تجربه و کامیون‌های استاندارد، امنیت محموله‌های شما را تضمین می‌کنیم." data-lang-ps="د سیمې او اروپا ټولو هیوادونو ته د مجهز او عصري فلیټ سره د سړک ترانسپورت خدمتونه. موږ د تجربه لرونکو ډریورانو او معیاري لاریو په کارولو سره، ستاسو د محمولو امنیت تضمینوو." data-lang-en="Road transportation services with equipped and modern fleet to all countries in the region and Europe. We guarantee the security of your shipments by employing experienced drivers and standard trucks.">خدمات حمل و نقل جاده‌ای با ناوگان مجهز و مدرن به تمام کشورهای منطقه و اروپا. ما با بهره‌گیری از رانندگان با تجربه و کامیون‌های استاندارد، امنیت محموله‌های شما را تضمین می‌کنیم.</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="حمل و نقل کامیونی" data-lang-ps="د لارۍ ترانسپورت" data-lang-en="Truck Transportation">حمل و نقل کامیونی</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="ترانزیت بین‌المللی" data-lang-ps="نړیوال ترانزیت" data-lang-en="International Transit">ترانزیت بین‌المللی</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="خدمات گمرکی" data-lang-ps="ګمرکي خدمتونه" data-lang-en="Customs Services">خدمات گمرکی</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=air%2520freight%2520logistics%2520with%2520cargo%2520plane%2520being%2520loaded%2C%2520airport%2520freight%2520operations%2C%2520international%2520air%2520shipping%2520service%2C%2520professional%2520aviation%2520logistics%2C%2520high-quality%2520professional%2520photo&width=600&height=400&seq=6&orientation=landscape" alt="حمل و نقل هوایی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full text-primary mb-4">
+                            <i class="ri-plane-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang-fa="حمل و نقل هوایی" data-lang-ps="هوايي ترانسپورت" data-lang-en="Air Transportation">حمل و نقل هوایی</h3>
+                        <p class="text-gray-600 mb-4" data-lang-fa="خدمات حمل و نقل هوایی سریع و مطمئن به سراسر جهان. ما با همکاری با شرکت‌های هواپیمایی معتبر، امکان ارسال محموله‌های شما را در کوتاه‌ترین زمان ممکن فراهم می‌کنیم." data-lang-ps="ټولې نړۍ ته چټک او باوري هوايي ترانسپورت خدمتونه. موږ د معتبرو هوايي شرکتونو سره په همکارۍ، ستاسو محمولې په لږ وخت کې د لیږلو امکان برابروو." data-lang-en="Fast and reliable air transportation services worldwide. By collaborating with reputable airlines, we provide the possibility of sending your shipments in the shortest possible time.">خدمات حمل و نقل هوایی سریع و مطمئن به سراسر جهان. ما با همکاری با شرکت‌های هواپیمایی معتبر، امکان ارسال محموله‌های شما را در کوتاه‌ترین زمان ممکن فراهم می‌کنیم.</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="حمل بار هوایی" data-lang-ps="هوايي کارګو" data-lang-en="Air Cargo">حمل بار هوایی</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="خدمات اکسپرس" data-lang-ps="اکسپرس خدمتونه" data-lang-en="Express Services">خدمات اکسپرس</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="ترخیص کالا" data-lang-ps="د توکو ترخیص" data-lang-en="Cargo Clearance">ترخیص کالا</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=sea%2520freight%2520with%2520cargo%2520container%2520ship%2520at%2520port%2C%2520maritime%2520logistics%2C%2520international%2520shipping%2520operations%2C%2520commercial%2520port%2520with%2520cranes%2520loading%2520containers%2C%2520high-quality%2520professional%2520photo&width=600&height=400&seq=7&orientation=landscape" alt="حمل و نقل دریایی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full text-primary mb-4">
+                            <i class="ri-ship-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang-fa="حمل و نقل دریایی" data-lang-ps="بحري ترانسپورت" data-lang-en="Sea Transportation">حمل و نقل دریایی</h3>
+                        <p class="text-gray-600 mb-4" data-lang-fa="خدمات حمل و نقل دریایی مقرون به صرفه برای محموله‌های بزرگ. ما با ارتباط با خطوط کشتیرانی معتبر، امکان ارسال انواع کانتینر و محموله‌های فله را به تمام بنادر جهان فراهم می‌کنیم." data-lang-ps="د لویو محمولو لپاره مقرون په صرفه بحري ترانسپورت خدمتونه. موږ د معتبرو بحري شرکتونو سره په اړیکه کې، د نړۍ ټولو بندرونو ته د هر ډول کانټینر او عمده محمولو د لیږلو امکان برابروو." data-lang-en="Cost-effective sea transportation services for large shipments. By connecting with reputable shipping lines, we provide the possibility of sending all types of containers and bulk cargo to all ports of the world.">خدمات حمل و نقل دریایی مقرون به صرفه برای محموله‌های بزرگ. ما با ارتباط با خطوط کشتیرانی معتبر، امکان ارسال انواع کانتینر و محموله‌های فله را به تمام بنادر جهان فراهم می‌کنیم.</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="حمل کانتینری" data-lang-ps="کانټینر ترانسپورت" data-lang-en="Container Shipping">حمل کانتینری</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="حمل محموله‌های فله" data-lang-ps="د عمده محمولو لېږد" data-lang-en="Bulk Cargo Shipping">حمل محموله‌های فله</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="مستندسازی دریایی" data-lang-ps="بحري مستندسازي" data-lang-en="Maritime Documentation">مستندسازی دریایی</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=customs%2520clearance%2520service%2520with%2520professional%2520staff%2520checking%2520documents%2C%2520international%2520freight%2520forwarding%2C%2520import-export%2520paperwork%2520processing%2C%2520logistics%2520documentation%2C%2520high-quality%2520professional%2520photo&width=600&height=400&seq=8&orientation=landscape" alt="خدمات گمرکی" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full text-primary mb-4">
+                            <i class="ri-file-list-3-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang-fa="خدمات گمرکی و ترخیص" data-lang-ps="ګمرکي او ترخیص خدمتونه" data-lang-en="Customs & Clearance Services">خدمات گمرکی و ترخیص</h3>
+                        <p class="text-gray-600 mb-4" data-lang-fa="خدمات تخصصی ترخیص کالا از گمرکات داخلی و خارجی. کارشناسان ما با تسلط کامل بر قوانین گمرکی کشورهای مختلف، فرآیند ترخیص کالای شما را به سرعت و با کمترین هزینه انجام می‌دهند." data-lang-ps="د کورنیو او بهرنیو ګمرکونو څخه د توکو ترخیص تخصصي خدمتونه. زموږ کارپوهان د مختلفو هیوادونو په ګمرکي قوانینو باندې په بشپړ تسلط سره، ستاسو د توکو د ترخیص پروسه په چټکۍ او لږ لګښت سره ترسره کوي." data-lang-en="Specialized services for clearing goods from domestic and foreign customs. Our experts, with complete mastery of the customs laws of different countries, carry out your goods clearance process quickly and at the lowest cost.">خدمات تخصصی ترخیص کالا از گمرکات داخلی و خارجی. کارشناسان ما با تسلط کامل بر قوانین گمرکی کشورهای مختلف، فرآیند ترخیص کالای شما را به سرعت و با کمترین هزینه انجام می‌دهند.</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="ترخیص کالا" data-lang-ps="د توکو ترخیص" data-lang-en="Goods Clearance">ترخیص کالا</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="مشاوره قوانین گمرکی" data-lang-ps="د ګمرکي قوانینو مشوره" data-lang-en="Customs Regulations Consulting">مشاوره قوانین گمرکی</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="تهیه اسناد گمرکی" data-lang-ps="د ګمرکي اسنادو چمتو کول" data-lang-en="Preparation of Customs Documents">تهیه اسناد گمرکی</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=warehousing%2520and%2520storage%2520facility%2520with%2520organized%2520shelves%2520and%2520forklifts%2C%2520logistics%2520center%2C%2520modern%2520inventory%2520management%2C%2520commercial%2520distribution%2520center%2C%2520high-quality%2520professional%2520photo&width=600&height=400&seq=9&orientation=landscape" alt="انبارداری و توزیع" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full text-primary mb-4">
+                            <i class="ri-store-2-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang-fa="انبارداری و توزیع" data-lang-ps="ګودام او توزیع" data-lang-en="Warehousing & Distribution">انبارداری و توزیع</h3>
+                        <p class="text-gray-600 mb-4" data-lang-fa="خدمات انبارداری و توزیع کالا در سطح ملی و بین‌المللی. ما با بهره‌گیری از انبارهای مجهز و استاندارد، امکان نگهداری و توزیع کالای شما را در بهترین شرایط فراهم می‌کنیم." data-lang-ps="په ملي او نړیواله کچه د توکو ګودام او توزیع خدمتونه. موږ د مجهزو او معیاري ګودامونو په کارولو سره، ستاسو د توکو د ساتلو او توزیع امکان په غوره شرایطو کې برابروو." data-lang-en="Warehousing and distribution services at national and international levels. By utilizing equipped and standard warehouses, we provide the possibility of storing and distributing your goods in the best conditions.">خدمات انبارداری و توزیع کالا در سطح ملی و بین‌المللی. ما با بهره‌گیری از انبارهای مجهز و استاندارد، امکان نگهداری و توزیع کالای شما را در بهترین شرایط فراهم می‌کنیم.</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="انبارداری" data-lang-ps="ګودام" data-lang-en="Warehousing">انبارداری</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="بسته‌بندی" data-lang-ps="بسته بندي" data-lang-en="Packaging">بسته‌بندی</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="توزیع و پخش" data-lang-ps="توزیع او ویش" data-lang-en="Distribution">توزیع و پخش</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=logistics%2520consulting%2520with%2520professional%2520team%2520in%2520meeting%2C%2520supply%2520chain%2520management%2C%2520international%2520shipping%2520experts%2520discussing%2520strategy%2C%2520business%2520consultation%2520for%2520freight%2520forwarding%2C%2520high-quality%2520professional%2520photo&width=600&height=400&seq=10&orientation=landscape" alt="مشاوره لجستیک" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-14 h-14 flex items-center justify-center bg-primary/10 rounded-full text-primary mb-4">
+                            <i class="ri-customer-service-2-line text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang-fa="مشاوره لجستیک" data-lang-ps="د لوجیستیک مشوره" data-lang-en="Logistics Consulting">مشاوره لجستیک</h3>
+                        <p class="text-gray-600 mb-4" data-lang-fa="خدمات مشاوره تخصصی در زمینه لجستیک و زنجیره تأمین. کارشناسان ما با تجربه و دانش گسترده در این حوزه، بهترین راهکارها را برای بهینه‌سازی فرآیندهای لجستیکی کسب و کار شما ارائه می‌دهند." data-lang-ps="د لوجیستیک او عرضه زنځیر په برخه کې تخصصي مشورتي خدمتونه. زموږ کارپوهان په دې برخه کې د پراخه تجربې او پوهې سره، ستاسو د سوداګرۍ د لوجیستیکي پروسو د غوره کولو لپاره غوره حل لارې وړاندې کوي." data-lang-en="Specialized consulting services in the field of logistics and supply chain. Our experts, with extensive experience and knowledge in this field, provide the best solutions for optimizing the logistics processes of your business.">خدمات مشاوره تخصصی در زمینه لجستیک و زنجیره تأمین. کارشناسان ما با تجربه و دانش گسترده در این حوزه، بهترین راهکارها را برای بهینه‌سازی فرآیندهای لجستیکی کسب و کار شما ارائه می‌دهند.</p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="مشاوره زنجیره تأمین" data-lang-ps="د عرضه زنځیر مشوره" data-lang-en="Supply Chain Consulting">مشاوره زنجیره تأمین</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="بهینه‌سازی مسیر" data-lang-ps="د لارې غوره کول" data-lang-en="Route Optimization">بهینه‌سازی مسیر</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span class="text-gray-700 text-sm" data-lang-fa="تحلیل هزینه‌های لجستیک" data-lang-ps="د لوجیستیک لګښتونو تحلیل" data-lang-en="Logistics Cost Analysis">تحلیل هزینه‌های لجستیک</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-lang-fa="تماس با ما" data-lang-ps="موږ سره اړیکه ونیسئ" data-lang-en="Contact Us">تماس با ما</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-lang-fa="برای درخواست خدمات یا کسب اطلاعات بیشتر با ما در تماس باشید" data-lang-ps="د خدماتو غوښتنې یا نورو معلوماتو لپاره موږ سره اړیکه ونیسئ" data-lang-en="Contact us for service requests or more information">برای درخواست خدمات یا کسب اطلاعات بیشتر با ما در تماس باشید</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4"></div>
+            </div>
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6" data-lang-fa="اطلاعات تماس" data-lang-ps="د اړیکې معلومات" data-lang-en="Contact Information">اطلاعات تماس</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mt-1 ml-3">
+                                    <i class="ri-map-pin-line text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1" data-lang-fa="آدرس دفتر مرکزی" data-lang-ps="د مرکزي دفتر پته" data-lang-en="Head Office Address">آدرس دفتر مرکزی</h4>
+                                    <p class="text-gray-600" data-lang-fa="هرات، جاده بهزاد ، پلاک ۴۵" data-lang-ps="هرات، د  بهزاد سړک، پلاک ۴۵" data-lang-en="Herat, Behzad St., , No. 45">"هرات، جاده بهزاد ، پلاک ۴۵"</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mt-1 ml-3">
+                                    <i class="ri-phone-line text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1" data-lang-fa="شماره تماس" data-lang-ps="د اړیکې شمیره" data-lang-en="Phone Number">شماره تماس</h4>
+                                    <p class="text-gray-600" dir="ltr">۰۷۰۸۱۳۷۱۴۳</p>
+                                    <p class="text-gray-600" dir="ltr">۰۷۹۶۰۰۳۷۶۵</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mt-1 ml-3">
+                                    <i class="ri-mail-line text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1" data-lang-fa="ایمیل" data-lang-ps="بریښنالیک" data-lang-en="Email">ایمیل</h4>
+                                    <p class="text-gray-600" dir="ltr">info@edrisalvand.com</p>
+                                    <p class="text-gray-600" dir="ltr">support@edrisalvand.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full text-primary mt-1 ml-3">
+                                    <i class="ri-time-line text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1" data-lang-fa="ساعات کاری" data-lang-ps="د کار ساعتونه" data-lang-en="Working Hours">ساعات کاری</h4>
+                                    <p class="text-gray-600" data-lang-fa="شنبه تا پنجشنبه: ۸:۳۰ الی ۱۷:۰۰" data-lang-ps="شنبه تر چهارشنبې: ۸:۳۰ - ۱۷:۰۰" data-lang-en="Saturday to Wednesday: 8:30 AM - 5:00 PM">شنبه تا چهارشنبه: ۸:۳۰ الی ۱۷:۰۰</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden h-[300px]">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3783.8025252302855!2d62.19335452506062!3d34.35074425830783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfa!2sqa!4v1749605889278!5m2!1sfa!2sqa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" data-lang-fa="درباره شرکت" data-lang-ps="د شرکت په اړه" data-lang-en="About Company">درباره شرکت</h3>
+                    <p class="text-gray-400 mb-4" data-lang-fa="شرکت ترانزیتی و بارچالانی بین‌المللی ادریس الوند با بیش از ۱۵ سال تجربه، ارائه دهنده خدمات حمل و نقل زمینی، هوایی و دریایی در سطح بین‌المللی." data-lang-ps="ادریس الوند نړیوال ترانزیت او بار وړلو شرکت د ۱۵ کلونو څخه زیات تجربې سره، د ځمکني، هوايي او بحري ترانسپورت خدماتو وړاندې کوونکی په نړیواله کچه." data-lang-en="Edris Alvand International Transit & Forwarding Company, with over 15 years of experience, provides land, air, and sea transportation services at the international level.">شرکت ترانزیتی و بارچالانی بین‌المللی ادریس الوند با بیش از ۱۵ سال تجربه، ارائه دهنده خدمات حمل و نقل زمینی، هوایی و دریایی در سطح بین‌المللی.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="ri-instagram-line text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="ri-linkedin-line text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="ri-telegram-line text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="ri-whatsapp-line text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" data-lang-fa="خدمات ما" data-lang-ps="زموږ خدمتونه" data-lang-en="Our Services">خدمات ما</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="حمل و نقل زمینی" data-lang-ps="ځمکني ترانسپورت" data-lang-en="Land Transportation">حمل و نقل زمینی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="حمل و نقل هوایی" data-lang-ps="هوايي ترانسپورت" data-lang-en="Air Transportation">حمل و نقل هوایی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="حمل و نقل دریایی" data-lang-ps="بحري ترانسپورت" data-lang-en="Sea Transportation">حمل و نقل دریایی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="خدمات گمرکی" data-lang-ps="ګمرکي خدمتونه" data-lang-en="Customs Services">خدمات گمرکی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="انبارداری و توزیع" data-lang-ps="ګودام او توزیع" data-lang-en="Warehousing & Distribution">انبارداری و توزیع</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" data-lang-fa="لینک‌های سریع" data-lang-ps="چټک لینکونه" data-lang-en="Quick Links">لینک‌های سریع</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#home" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="صفحه اصلی" data-lang-ps="اصلي پاڼه" data-lang-en="Home Page">صفحه اصلی</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="درباره ما" data-lang-ps="زموږ په اړه" data-lang-en="About Us">درباره ما</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="خدمات" data-lang-ps="خدمتونه" data-lang-en="Services">خدمات</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="text-gray-400 hover:text-white transition duration-300 flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center text-primary ml-2">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </div>
+                                <span data-lang-fa="تماس با ما" data-lang-ps="موږ سره اړیکه ونیسئ" data-lang-en="Contact Us">تماس با ما</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" data-lang-fa="اطلاعات تماس" data-lang-ps="د اړیکې معلومات" data-lang-en="Contact Information">اطلاعات تماس</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 ml-3">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400" data-lang-fa="هرات، جاده بهزاد ، پلاک ۴۵" data-lang-ps="هرات، د  بهزاد سړک، پلاک ۴۵" data-lang-en="Herat, Behzad St., , No. 45">هرات، جاده بهزاد،  پلاک ۴۵</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 ml-3">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span class="text-gray-400" dir="ltr">۰۷۰۸۱۳۷۱۴۳</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center text-primary mt-1 ml-3">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span class="text-gray-400" dir="ltr">info@edrisalvand.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+    </footer>
+
+    <script id="mobile-menu-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Change icon based on menu state
+                const icon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-line');
+                } else {
+                    icon.classList.remove('ri-menu-line');
+                    icon.classList.add('ri-close-line');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-line');
+                });
+            });
+        });
+    </script>
+    
+    <script id="language-selector-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageButton = document.getElementById('language-button');
+            const languageDropdown = document.getElementById('language-dropdown');
+            const languageOptions = document.querySelectorAll('#language-dropdown button');
+            const currentLanguageSpan = document.getElementById('current-language');
+            const toast = document.getElementById('toast');
+            
+            // Language texts
+            const languageTexts = {
+                'fa': {
+                    'toast': 'زبان به فارسی تغییر کرد'
+                },
+                'ps': {
+                    'toast': 'ژبه پښتو ته بدله شوه'
+                },
+                'en': {
+                    'toast': 'Language changed to English'
+                }
+            };
+            
+            // Toggle dropdown
+            languageButton.addEventListener('click', function() {
+                languageDropdown.classList.toggle('hidden');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!languageButton.contains(event.target) && !languageDropdown.contains(event.target)) {
+                    languageDropdown.classList.add('hidden');
+                }
+            });
+            
+            // Language selection
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    document.documentElement.lang = lang;
+                    
+                    // Set direction based on language
+                    if (lang === 'en') {
+                        document.documentElement.dir = 'ltr';
+                    } else {
+                        document.documentElement.dir = 'rtl';
+                    }
+                    
+                    // Update current language text
+                    const elements = document.querySelectorAll('[data-lang-' + lang + ']');
+                    elements.forEach(el => {
+                        el.textContent = el.getAttribute('data-lang-' + lang);
+                    });
+                    
+                    // Update current language in button
+                    currentLanguageSpan.textContent = currentLanguageSpan.getAttribute('data-lang-' + lang);
+                    
+                    // Show toast notification
+                    toast.textContent = languageTexts[lang]['toast'];
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                    
+                    // Hide dropdown
+                    languageDropdown.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+    
+    <script id="slider-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const sliderNav = document.querySelector('.slider-nav');
+            const prevArrow = document.querySelector('.slider-arrow.prev');
+            const nextArrow = document.querySelector('.slider-arrow.next');
+            
+            let currentSlide = 0;
+            const slideCount = slides.length;
+            let slideInterval;
+            
+            // Create navigation dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('slider-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetInterval();
+                });
+                sliderNav.appendChild(dot);
+            });
+            
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            // Function to go to a specific slide
+            function goToSlide(slideIndex) {
+                if (slideIndex < 0) slideIndex = slideCount - 1;
+                if (slideIndex >= slideCount) slideIndex = 0;
+                
+                slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    if (index === slideIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                currentSlide = slideIndex;
+            }
+            
+            // Function to go to the next slide
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+            
+            // Function to go to the previous slide
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+            
+            // Function to reset the interval
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 4000);
+            }
+            
+            // Set up event listeners for arrows
+            nextArrow.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+            
+            prevArrow.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+            
+            // Start the automatic slideshow
+            resetInterval();
+            
+            // Handle touch events for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const sliderContainer = document.querySelector('.slider-container');
+            
+            sliderContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            sliderContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe left
+                    nextSlide();
+                    resetInterval();
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe right
+                    prevSlide();
+                    resetInterval();
+                }
+            }
+        });
+    </script>
+    
+    <script id="contact-form-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const service = document.getElementById('service').value;
+                const message = document.getElementById('message').value;
+                
+                // Here you would typically send the form data to a server
+                // For this demo, we'll just show a success message
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Show success message (you can customize this)
+                const toast = document.getElementById('toast');
+                const currentLang = document.documentElement.lang;
+                
+                if (currentLang === 'fa') {
+                    toast.textContent = 'پیام شما با موفقیت ارسال شد. با تشکر!';
+                } else if (currentLang === 'ps') {
+                    toast.textContent = 'ستاسو پیغام په بریالیتوب سره ولیږل شو. مننه!';
+                } else {
+                    toast.textContent = 'Your message was sent successfully. Thank you!';
+                }
+                
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            });
+        });
+    </script>
+    
+    <script id="smooth-scroll-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Get header height to offset scroll position
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    </script>
+<!-- محتوای اصلی صفحه -->
+<!-- دکمه تلفن دایره‌ای در گوشه صفحه -->
+<a href="#" onclick="makeCall()" 
+   class="fixed bottom-4 right-4 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition duration-300">
+   <i class="ri-phone-line text-2xl"></i>
+</a>
+
+<!-- اسکریپت تماس با alert -->
+<script>
+    function makeCall() {
+        alert("در حال انتقال به تماس...");
+        window.location.href = "tel:0796003765"; // شماره‌ات رو اینجا بذار
+    }
+</script>
+</body>
+</html>
